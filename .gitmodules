@@ -1,3 +1,6 @@
 [submodule "mtkclient"]
 	path = mtkclient
 	url = https://github.com/bkerler/mtkclient
+[submodule "src/MtkClient.Library"]
+	path = src/MtkClient.Library
+	url = https://github.com/dissident2/MtkClient.Library.git
