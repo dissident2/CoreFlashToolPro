@@ -15,3 +15,5 @@ mtkclient/**
 # Paket/ara dosyalar
 *.log
 *.tmp
+
+/mtk_old.exe
