@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Duplicate assembly attribute hatasını keser -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <!-- Uygulama projesindeki MtkClient.Library kaynaklarını derleme DIŞI bırak -->
+  <ItemGroup>
+    <Compile Remove="MtkClient.Library\**\*.cs" />
+  </ItemGroup>
+
+  <!-- mtkclient klasörünü çıktıya kopyala -->
+  <ItemGroup>
+    <Content Include="mtkclient\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- DOĞRU yol: app projesi ile aynı kökte ayrı bir proje ise bu iyi -->
+<ItemGroup>
+  <ProjectReference Include="E:\Deneme Tool\CoreFlashToolPro\MtkClient.Library\MtkClient.Library.csproj" />
+</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MtkClient.Library">
+      <HintPath>MtkClient.Library\bin\Debug\net8.0\MtkClient.Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
