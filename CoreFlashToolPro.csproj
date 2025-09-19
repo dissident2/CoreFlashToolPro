@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <!-- (Ä°steÄŸe baÄŸlÄ±) Uygulamaya karÄ±ÅŸmÄ±ÅŸ kÃ¼tÃ¼phane kaynaklarÄ±nÄ± dÄ±ÅŸla -->
+  <ItemGroup>
+    <Compile Remove="MtkClient.Library\**\*.cs" />
+    <Compile Remove="mtkclient\**\*.cs" />
+    <Compile Remove="src\MtkClient.Library\**\*.cs" />
+    <None Remove="CoreFlashToolPro.csproj.user" />
+  </ItemGroup>
+  <!-- Ã‡alÄ±ÅŸma zamanÄ±nda gereken dosyalar -->
+  <ItemGroup>
+    <Content Include="mtkclient\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <!-- KÃ¼tÃ¼phane referansÄ±: SADECE BÄ°R TANE -->
+  <ItemGroup>
+    <ProjectReference Include="src\MtkClient.Library\MtkClient.Library.csproj" />
+  </ItemGroup>
+  <!-- KonfigÃ¼rasyon paketleri -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
+  </ItemGroup>
+  <!-- Build sonrasÄ±nda mtk_old.exe'yi Ã§Ä±ktÄ± klasÃ¶rÃ¼ne kopyala (dosya varsa) -->
+  <Target Name="PostBuild" AfterTargets="Build">
+    <ItemGroup>
+      <MtkExe Include="$(ProjectDir)tools\mtk\mtk_old.exe" Condition="Exists('$(ProjectDir)tools\mtk\mtk_old.exe')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MtkExe)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" Condition=" '@(MtkExe)' != '' " />
+  </Target>
+</Project>

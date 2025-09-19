@@ -1,0 +1,17 @@
+﻿# Build çıktıları
+bin/
+obj/
+
+# VS/IDE önbellekleri
+.vs/
+*.user
+*.suo
+
+# Proje-özel
+*.csproj.user
+tools/mtk/mtk_old.exe
+mtkclient/**
+
+# Paket/ara dosyalar
+*.log
+*.tmp
